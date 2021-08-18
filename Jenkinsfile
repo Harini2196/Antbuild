@@ -32,7 +32,7 @@ pipeline{
                 }
             }
         }
-        stage ('Login to deployment server')
+      /*  stage ('Login to deployment server')
         {
             steps{
                 sshagent(['centos-slave']) {
@@ -62,6 +62,6 @@ pipeline{
 				   }              
               }
             }
-        }
+        }*/
     }
 }
