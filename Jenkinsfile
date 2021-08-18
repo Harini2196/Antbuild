@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('Git clone'){
             steps{
-               git credentialsId: 'git_creds', branch:'master', url: 'https://github.com/VivekDev123/Antbuild.git' 
+               git credentialsId: 'git_creds', branch:'haribranch', url: 'https://github.com/harini2196/Antbuild.git' 
             }
         }
         stage('Ant Build') {
