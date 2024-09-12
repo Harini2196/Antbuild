@@ -1,0 +1,27 @@
+node{
+  wrap([$class: 'BuildUser']){
+      stage("cleanup"){
+          deleteDir()
+      }
+      stage("checkout"){
+           checkout([$class: 'GitSCM',
+                branches: [[name: 'master']], 
+                extensions: [], 
+                userRemoteConfigs: [[credentialsId: 'github-creds', url: 'https://github.com/Harini2196/${repoName}.git']]
+                ]) 
+      }
+      stage("build"){
+          String buildFolderPath = sh(script: "find ${WORKSPACE}/ -name 'build.xml'", returnStdout: true).trim()
+          echo buildFolderPath
+          if (buildFolderPath == "" ){
+              echo "performing maven build"
+              sh "mvn clean install"
+          }else{
+              echo "******Performing ANT build**************"\
+              sh """cd 'Registration Page/'
+                    ant compile"""
+          }
+         
+      }
+  }
+}
